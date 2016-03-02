@@ -17,13 +17,27 @@
 
 * * *
 
+
+
+* * *
+
+##链接
+
 ![markdown](http://mouapp.com/Mou_128.png)
-[我的邮箱]（https://mail.qq.com/cgi-bin/frame_html?sid=dJO3py38OF2LEyRy&r=499ff94879613bca7b5e727a3b061ad7）
+[Google]: http://google.com/
 
 * * *
 
 ##代码片段
 
-'javascript'
-'''javascript'''
+`javascript`
+`
+print a
+print b
+print c
+`
+
+
+
+
 
