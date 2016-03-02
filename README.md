@@ -1,6 +1,5 @@
 #游戏策划第一次作业
 
-####*just do it!*
 
 ##自我介绍
 
@@ -42,6 +41,9 @@
   javascriptString a = String.valueOf(2);   //integer to numeric string
   int i = Integer.parseInt(a); //numeric string to an int
 ```
+* * *
+
+####*just do it!*
 
 
 
