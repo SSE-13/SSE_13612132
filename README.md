@@ -24,18 +24,14 @@
 ##链接
 
 ![markdown](http://mouapp.com/Mou_128.png)
-[Google]: http://google.com/
+[Google]:(http://google.com/)
 
 * * *
 
 ##代码片段
 
-`javascript`
-`
-print a
-print b
-print c
-`
+```javascriptString a = String.valueOf(2);   //integer to numeric string
+int i = Integer.parseInt(a); //numeric string to an int```
 
 
 
