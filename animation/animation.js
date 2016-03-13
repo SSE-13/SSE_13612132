@@ -35,7 +35,7 @@ var Ticker = (function () {
 }());
 var Body = (function () {
     function Body(displayObject) {
-        this.vx = 0;
+        this.vx = 10;
         this.vy = 0;
         this.x = 0;
         this.y = 0;
@@ -50,8 +50,17 @@ var Body = (function () {
         //反弹
         if (this.y + this.height > BOUNDS_BOTTOM) {
             this.vy = -BOUNCE * this.vy;
+            if (this.y + this.height > BOUNDS_BOTTOM + 100) {
+                this.y = this.y - 100;
+            }
         }
         //TODO： 左右越界反弹
+        if (this.x + this.width > BOUNDS_RIGHT) {
+            this.vx = -BOUNCE * this.vx;
+        }
+        if (this.x + this.width < BOUNDS_LEFT + 150) {
+            this.vx = -BOUNCE * this.vx;
+        }
         //根据物体位置更新显示对象属性
         var displayObject = this.displayObject;
         displayObject.x = this.x;

@@ -45,7 +45,7 @@ class Ticker {
 
 class Body {
 
-    vx = 0;
+    vx = 10;
     vy = 0;
     x = 0;
     y = 0;
@@ -68,9 +68,17 @@ class Body {
         if (this.y + this.height > BOUNDS_BOTTOM) {
             this.vy = -BOUNCE * this.vy;
         }
+        
+       
 
         //TODO： 左右越界反弹
-
+         if (this.x + this.width > BOUNDS_RIGHT) {
+            this.vx = -BOUNCE * this.vx;
+        }
+        
+        if (this.x + this.width < BOUNDS_LEFT+150) {
+            this.vx = -BOUNCE * this.vx;
+        }
 
 
         //根据物体位置更新显示对象属性
