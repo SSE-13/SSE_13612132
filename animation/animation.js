@@ -39,27 +39,35 @@ var Body = (function () {
         this.vy = 0;
         this.x = 0;
         this.y = 0;
-        this.width = 0;
-        this.height = 0;
+        this.width = 150;
+        this.height = 100;
+        this.ymark = true;
+        this.bmark = true;
         this.displayObject = displayObject;
     }
     Body.prototype.onTicker = function (duringTime) {
         this.vy += duringTime * GRAVITY;
         this.x += duringTime * this.vx;
-        this.y += duringTime * this.vy;
+        if (this.ymark) {
+            this.y += duringTime * this.vy;
+        }
+        if (!this.ymark) {
+            this.y = this.y;
+        }
         //反弹
         if (this.y + this.height > BOUNDS_BOTTOM) {
             this.vy = -BOUNCE * this.vy;
-            if (this.y + this.height > BOUNDS_BOTTOM + 100) {
-                this.y = this.y - 100;
+            if (Math.abs(this.vy) < 0.1 && this.bmark == false) {
+                this.ymark = false;
             }
         }
         //TODO： 左右越界反弹
         if (this.x + this.width > BOUNDS_RIGHT) {
             this.vx = -BOUNCE * this.vx;
         }
-        if (this.x + this.width < BOUNDS_LEFT + 150) {
+        if (this.x + this.width < BOUNDS_LEFT + this.width) {
             this.vx = -BOUNCE * this.vx;
+            this.bmark = false;
         }
         //根据物体位置更新显示对象属性
         var displayObject = this.displayObject;

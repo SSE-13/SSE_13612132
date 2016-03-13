@@ -49,8 +49,11 @@ class Body {
     vy = 0;
     x = 0;
     y = 0;
-    width = 0;
-    height = 0;
+    width = 150;
+    height = 100;
+    ymark = true;
+    bmark = true;
+    
 
     displayObject;
 
@@ -59,14 +62,22 @@ class Body {
     }
 
     public onTicker(duringTime) {
-
+        
         this.vy += duringTime * GRAVITY;
         this.x += duringTime * this.vx;
-        this.y += duringTime * this.vy;
-
+        
+        if( this.ymark ){
+            this.y += duringTime * this.vy;
+        }
+        if( !this.ymark ){
+            this.y = this.y;
+        }
         //反弹
         if (this.y + this.height > BOUNDS_BOTTOM) {
             this.vy = -BOUNCE * this.vy;
+            if(Math.abs(this.vy) < 0.1 && this.bmark == false){
+                this.ymark = false;
+             }
         }
         
        
@@ -76,8 +87,9 @@ class Body {
             this.vx = -BOUNCE * this.vx;
         }
         
-        if (this.x + this.width < BOUNDS_LEFT+150) {
+        if (this.x + this.width < BOUNDS_LEFT + this.width) {
             this.vx = -BOUNCE * this.vx;
+            this.bmark = false;
         }
 
 
