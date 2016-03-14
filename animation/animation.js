@@ -6,7 +6,7 @@ var BOUNDS_BOTTOM = 400;
 var BOUNDS_LEFT = 0;
 var BOUNDS_RIGHT = 400;
 var BOUNCE = 0.95;
-var FRICTION = 0.95;
+var FRICTION = 0.15;
 /**
  * 计时器系统
  */
@@ -44,6 +44,7 @@ var Body = (function () {
         this.height = 100;
         this.ymark = true;
         this.bmark = true;
+        this.fmark = true;
         this.displayObject = displayObject;
     }
     Body.prototype.onTicker = function (duringTime) {
@@ -54,21 +55,34 @@ var Body = (function () {
         }
         if (!this.ymark) {
             this.y = this.y;
+            if (this.fmark) {
+                this.vx -= duringTime * FRICTION;
+                if (Math.abs(this.vx) < 1) {
+                    this.vx = 0;
+                }
+            }
+            if (!this.fmark)
+                this.vx += duringTime * FRICTION;
+            if (Math.abs(this.vx) < 1) {
+                this.vx = 0;
+            }
         }
         //反弹
         if (this.y + this.height > BOUNDS_BOTTOM && this.vy > 0) {
             this.vy = -BOUNCE * this.vy;
-            if (Math.abs(this.vy) < 0.2 && this.bmark == false) {
+            if (Math.abs(this.vy) < 0.6 && this.bmark == false) {
                 this.ymark = false;
             }
         }
         //TODO： 左右越界反弹
         if (this.x + this.width > BOUNDS_RIGHT && this.vx > 0) {
             this.vx = -this.vx;
+            this.fmark = false;
         }
         if (this.x + this.width < BOUNDS_LEFT + this.width && this.vx < 0) {
             this.vx = -BOUNCE * this.vx;
             this.bmark = false;
+            this.fmark = true;
         }
         //根据物体位置更新显示对象属性
         var displayObject = this.displayObject;

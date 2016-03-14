@@ -12,7 +12,7 @@ const BOUNDS_RIGHT = 400;
 
 const BOUNCE = 0.95;
 
-const FRICTION = 0.95;
+const FRICTION = 0.15;
 
 /**
  * 计时器系统
@@ -55,6 +55,7 @@ class Body {
     height = 100;
     ymark = true;
     bmark = true;
+    fmark = true;
     
 
     displayObject;
@@ -73,24 +74,36 @@ class Body {
         }
         if( !this.ymark ){
             this.y = this.y;
-            //this.vx = duringTime * FRICTION;
+            if(this.fmark){
+                this.vx -= duringTime * FRICTION;
+                if(Math.abs(this.vx) < 1){
+                    this.vx = 0;
+                }
+            }
+            if(!this.fmark)
+                this.vx += duringTime * FRICTION;
+                 if(Math.abs(this.vx) < 1){
+                    this.vx = 0;
+                }
         }
         //反弹
         if (this.y + this.height > BOUNDS_BOTTOM && this.vy > 0) {
             this.vy = -BOUNCE * this.vy;
-            if(Math.abs(this.vy) < 0.2 && this.bmark == false){
+            if(Math.abs(this.vy) < 0.6 && this.bmark == false){
                 this.ymark = false;
              }
         }    
 
         //TODO： 左右越界反弹
          if (this.x + this.width > BOUNDS_RIGHT && this.vx >0) {
-            this.vx = -this.vx;
+            this.vx = -this.vx;           
+            this.fmark = false;
         }
         
         if (this.x + this.width < BOUNDS_LEFT + this.width && this.vx <0) {
             this.vx = -BOUNCE * this.vx;
             this.bmark = false;
+            this.fmark = true;
         }
 
 
