@@ -112,7 +112,7 @@ module render {
 
     }
 
-    class Rect extends DisplayObject {
+    export class Rect extends DisplayObject {
 
         width = 100
 

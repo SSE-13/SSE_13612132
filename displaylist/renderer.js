@@ -99,6 +99,7 @@ var render;
         };
         return Rect;
     }(DisplayObject));
+    render.Rect = Rect;
     var TextField = (function (_super) {
         __extends(TextField, _super);
         function TextField() {

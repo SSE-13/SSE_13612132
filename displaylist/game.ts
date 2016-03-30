@@ -6,8 +6,8 @@ module game {
 var humanContainer = new render.DisplayObjectContainer();
 var head = new render.Bitmap();
 head.source = "head.png";
-head.x -= 150;
-head.y -= 20;
+head.x -= 80;
+head.y -= 200;
 
 humanContainer.addChild(head)
 
@@ -31,28 +31,28 @@ var ticker = new Ticker();
 
 var bod = new render.Bitmap();
 bod.source = "body.png";
-bod.x -= 125;
-bod.y += 125;
+bod.x -= 55;
+bod.y -= 50;
 
 var lleg = new render.Bitmap();
 lleg.source = "lleg.png";
-lleg.x -= 95;
-lleg.y += 220;
+lleg.x -= 30;
+lleg.y += 50;
 
 var rleg = new render.Bitmap();
 rleg.source = "rleg.png";
-rleg.x -= 65;
-rleg.y += 220;
+rleg.x -= 0;
+rleg.y += 50;
 
 var larm = new render.Bitmap();
 larm.source = "larm.png";
-larm.x -= 40;
-larm.y += 120;
+larm.x += 20;
+larm.y -= 50;
 
 var rarm = new render.Bitmap();
 rarm.source = "rarm.png";
-rarm.x -= 160;
-rarm.y +=120;
+rarm.x -= 85;
+rarm.y -= 50;
 
 humanContainer.addChild(bod);
 humanContainer.addChild(lleg);
