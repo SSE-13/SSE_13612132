@@ -106,7 +106,7 @@ var headHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
             }      
         }
     }
-     if(localPoint.x > left_leg.x - head.x && localPoint.x < right_leg.x - head.x ){//head.x - head.width/2 && localPoint.x < head.x + head.width/2){
+     if(localPoint.x > left_leg.x - head.x- 10 && localPoint.x < right_leg.x - head.x + 10 ){//head.x - head.width/2 && localPoint.x < head.x + head.width/2){
         if(localPoint.y > left_leg.y - head.y && localPoint.y < left_leg.y - head.y + left_leg.high ){
              //console.log('1');
              stand = true;           
