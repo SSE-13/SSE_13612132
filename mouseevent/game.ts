@@ -85,14 +85,14 @@ eventCore.init();
 var headHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
     alert (`点击位置为${localPoint.x},${localPoint.y}`);
     console.log(head.x);
-    if(localPoint.x > 0 && localPoint.x < 153 ){//head.x - head.width/2 && localPoint.x < head.x + head.width/2){
-        //if(localPoint.y > head.y - head.high/2 && localPoint.y < head.y + head.high/2){
+    if(localPoint.x > 0 && localPoint.x < head.width ){//head.x - head.width/2 && localPoint.x < head.x + head.width/2){
+        if(localPoint.y > 0 && localPoint.y < head.high ){//head.y - head.high/2 && localPoint.y < head.y + head.high/2){
             console.log(clickon);
             if(clickon == false)
                 clickon = true;  
             else if(clickon)
                 clickon = false;             
-        //}
+        }
     }
     
     return true;
