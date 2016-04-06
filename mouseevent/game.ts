@@ -2,6 +2,7 @@
 var humanContainer = new render.DisplayObjectContainer();
 var head = new render.Bitmap();
 var clickon = false;
+var stand = false;
 head.source = "head.png";
 head.x -= 80;
 head.y -= 200;
@@ -19,15 +20,23 @@ class HumanBody extends Body {
     vx:number = 5;
     
     onTicker(duringTime: number) {
-        if(clickon == false){
-            this.x += 1; 
-            this.y = 100;
-            this.rotation += 1;
+        if(stand == false){
+            if(clickon == false){
+                this.x += 1; 
+                this.y = 100;
+                this.rotation += 1;
+            }
+            if(clickon){
+                this.x -= 1; 
+                this.y = 100;
+                this.rotation -= 1;
+            }
         }
-        if(clickon){
-            this.x -= 1; 
+        if(stand)
+        {
+            
             this.y = 100;
-            this.rotation -= 1;
+            this.rotation = 1;
         }
     }
 }
@@ -84,16 +93,25 @@ eventCore.init();
 
 var headHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
     alert (`点击位置为${localPoint.x},${localPoint.y}`);
-    console.log(head.x);
     if(localPoint.x > 0 && localPoint.x < head.width ){//head.x - head.width/2 && localPoint.x < head.x + head.width/2){
         if(localPoint.y > 0 && localPoint.y < head.high ){//head.y - head.high/2 && localPoint.y < head.y + head.high/2){
             console.log(clickon);
-            if(clickon == false)
+            if(clickon == false){
                 clickon = true;  
-            else if(clickon)
-                clickon = false;             
+                stand = false; 
+            }
+            else if(clickon){
+                clickon = false;     
+                stand = false;  
+            }      
         }
     }
+     if(localPoint.x > left_leg.x - head.x && localPoint.x < right_leg.x - head.x ){//head.x - head.width/2 && localPoint.x < head.x + head.width/2){
+        if(localPoint.y > left_leg.y - head.y && localPoint.y < left_leg.y - head.y + left_leg.high ){
+             //console.log('1');
+             stand = true;           
+        }
+     }
     
     return true;
 }
