@@ -1,9 +1,12 @@
 
 var humanContainer = new render.DisplayObjectContainer();
 var head = new render.Bitmap();
+var clickon = false;
 head.source = "head.png";
 head.x -= 80;
 head.y -= 200;
+head.width = 153;
+head.high = 156;
 
 humanContainer.addChild(head);
 
@@ -13,14 +16,19 @@ renderCore.start(humanContainer, ["head.png","trunk.png","left_leg.png","right_l
 
 class HumanBody extends Body {
     
-    
     vx:number = 5;
     
-
     onTicker(duringTime: number) {
-        this.x += 1; 
-         this.y = 100;
-         this.rotation += 1;
+        if(clickon == false){
+            this.x += 1; 
+            this.y = 100;
+            this.rotation += 1;
+        }
+        if(clickon){
+            this.x -= 1; 
+            this.y = 100;
+            this.rotation -= 1;
+        }
     }
 }
 
@@ -30,26 +38,36 @@ var trunk = new render.Bitmap();
 trunk.source = "trunk.png";
 trunk.x -= 55;
 trunk.y -= 50;
+trunk.width = 108;
+trunk.high = 96;
 
 var left_leg = new render.Bitmap();
 left_leg.source = "left_leg.png";
 left_leg.x -= 30;
 left_leg.y += 50;
+left_leg.width = 25;
+left_leg.high = 71;
 
 var right_leg = new render.Bitmap();
 right_leg.source = "right_leg.png";
 right_leg.x -= 0;
 right_leg.y += 50;
+right_leg.width = 25;
+right_leg.high = 71;
 
 var left_arm = new render.Bitmap();
 left_arm.source = "left_arm.png";
 left_arm.x += 20;
 left_arm.y -= 50;
+left_arm.width = 72;
+left_arm.high = 23;
 
 var right_arm = new render.Bitmap();
 right_arm.source = "right_arm.png";
 right_arm.x -= 85;
 right_arm.y -= 50;
+right_arm.width = 66;
+right_arm.high = 23;
 
 humanContainer.addChild(trunk);
 humanContainer.addChild(left_leg);
@@ -66,15 +84,23 @@ eventCore.init();
 
 var headHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
     alert (`点击位置为${localPoint.x},${localPoint.y}`);
-    if(localPoint.x == head.x - && localPoint.y == head.y){
-        this.x -= 1; 
+    console.log(head.x);
+    if(localPoint.x > 0 && localPoint.x < 153 ){//head.x - head.width/2 && localPoint.x < head.x + head.width/2){
+        //if(localPoint.y > head.y - head.high/2 && localPoint.y < head.y + head.high/2){
+            console.log(clickon);
+            if(clickon == false)
+                clickon = true;  
+            else if(clickon)
+                clickon = false;             
+        //}
     }
-    if(localPoint.x == )
+    
     return true;
 }
 
 var headOnClick = () => {
     alert("clicked!!");
+    
     //修改 HumanBody 的速度，使其反向移动
 }
 
