@@ -106,14 +106,9 @@ var headHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
             }      
         }
     }
-     if(localPoint.x > left_leg.x - head.x- 10 && localPoint.x < right_leg.x - head.x + 10 ){//head.x - head.width/2 && localPoint.x < head.x + head.width/2){
-        if(localPoint.y > left_leg.y - head.y && localPoint.y < left_leg.y - head.y + left_leg.high ){
-             //console.log('1');
-             stand = true;           
-        }
-     }
-    
-    return true;
+     
+
+    return clickon;
 }
 
 var headOnClick = () => {
@@ -124,12 +119,24 @@ var headOnClick = () => {
 
 eventCore.register(head,headHitTest,headOnClick);
 
+var legHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
+    if(localPoint.x > 0 && localPoint.x < right_leg.x + right_leg.width + left_leg.width ){
+        console.log('2');//head.x - head.width/2 && localPoint.x < head.x + head.width/2){
+        if(localPoint.y > 0 && localPoint.y <left_leg.high ){
+             console.log('1');
+             stand = true;   
+        }
+     }
+     return stand;
+}
 
+var legOnClick = () => {
+    alert("clicked!!");
+    
+    //修改 HumanBody 的速度，使其反向移动
+}
 
-
-
-
-
+eventCore.register(left_leg,legHitTest,legOnClick);
 
 
 
