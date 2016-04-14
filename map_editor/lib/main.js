@@ -39,7 +39,7 @@ function onTileClick(tile) {
 var savebutton = new render.Bitmap();
 savebutton.source = "save.png";
 savebutton.x = 50;
-savebutton.y = -200;
+savebutton.y = 200;
 var SaveHitTest = (localPoint, displayObject) => {
     if (localPoint.x >= 0 && localPoint.x <= 100 && localPoint.y >= 0 && localPoint.y <= 50)
         return true;
@@ -47,6 +47,7 @@ var SaveHitTest = (localPoint, displayObject) => {
 function Save() {
     writeFile();
 }
+//eventCore.register(savebutton, SaveHitTest, Save);
 var mapData = readFile();
 var renderCore = new render.RenderCore();
 var eventCore = new events.EventCore();

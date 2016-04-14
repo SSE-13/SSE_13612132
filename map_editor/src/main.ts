@@ -42,7 +42,6 @@ function createMapEditor() {
 
 
 function onTileClick(tile: editor.Tile) {
-
     mapData[tile.ownedRow][tile.ownedCol]=mapData[tile.ownedRow][tile.ownedCol]?0:1;
     tile.setWalkable(mapData[tile.ownedRow][tile.ownedCol]);
   
@@ -51,7 +50,7 @@ function onTileClick(tile: editor.Tile) {
 var savebutton = new render.Bitmap();
 savebutton.source = "save.png";
 savebutton.x = 50;
-savebutton.y = -200;
+savebutton.y = 200;
 
 var SaveHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
     if(localPoint.x>=0&&localPoint.x<=100&&localPoint.y>=0&&localPoint.y<=50)
@@ -62,7 +61,7 @@ function Save() {
     writeFile();
 }
 
-
+//eventCore.register(savebutton, SaveHitTest, Save);
 
 var mapData = readFile();
 
