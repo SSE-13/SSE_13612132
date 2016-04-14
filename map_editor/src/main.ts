@@ -48,6 +48,22 @@ function onTileClick(tile: editor.Tile) {
   
 }
 
+var savebutton = new render.Bitmap();
+savebutton.source = "save.png";
+savebutton.x = 50;
+savebutton.y = -200;
+
+var SaveHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
+    if(localPoint.x>=0&&localPoint.x<=100&&localPoint.y>=0&&localPoint.y<=50)
+    return true;
+}
+
+function Save() {
+    writeFile();
+}
+
+
+
 var mapData = readFile();
 
 
