@@ -47,10 +47,14 @@ var SaveHitTest = (localPoint, displayObject) => {
 function Save() {
     writeFile();
 }
-//eventCore.register(savebutton, SaveHitTest, Save);
 var mapData = readFile();
 var renderCore = new render.RenderCore();
 var eventCore = new events.EventCore();
 eventCore.init();
 var editor = createMapEditor();
-renderCore.start(editor);
+//renderCore.start(editor);
+var mainContainer = new render.DisplayObjectContainer();
+mainContainer.addChild(savebutton);
+mainContainer.addChild(editor);
+renderCore.start(mainContainer, ["save.png"]);
+eventCore.register(savebutton, SaveHitTest, Save);
