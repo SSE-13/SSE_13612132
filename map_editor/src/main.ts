@@ -1,8 +1,7 @@
 
 import * as fs from 'fs';
 
-
-
+    
 function readFile() {
     var map_path = __dirname + "/map.json"
     var content = fs.readFileSync(map_path, "utf-8");
@@ -11,6 +10,11 @@ function readFile() {
     return mapData;
 }
 
+function writeFile(){
+    var map_path = __dirname + "/map.json"
+    var json="{\"map\":"+JSON.stringify(mapData)+"}";
+    fs.writeFileSync(map_path,json,"utf-8");
+}
 
 function createMapEditor() {
     var world = new editor.WorldMap();
@@ -28,8 +32,6 @@ function createMapEditor() {
             tile.width = editor.GRID_PIXEL_WIDTH;
             tile.height = editor.GRID_PIXEL_HEIGHT;
             world.addChild(tile);
-
-
             eventCore.register(tile, events.displayObjectRectHitTest, onTileClick);
         }
     }
@@ -40,9 +42,11 @@ function createMapEditor() {
 
 
 function onTileClick(tile: editor.Tile) {
-    console.log(tile);
-}
 
+    mapData[tile.ownedRow][tile.ownedCol]=mapData[tile.ownedRow][tile.ownedCol]?0:1;
+    tile.setWalkable(mapData[tile.ownedRow][tile.ownedCol]);
+  
+}
 
 var mapData = readFile();
 
